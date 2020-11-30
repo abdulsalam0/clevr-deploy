@@ -96,17 +96,28 @@
       </template>
 
       <img id="grid" src="https://img.gs/bbdkhfbzkk/stretch/https://i.imgur.com/25P1geh.png" crossorigin="anonymous">
-      <img id="sky" src="https://img.gs/bbdkhfbzkk/2048x2048,stretch/https://i.imgur.com/WqlqEkq.jpg" crossorigin="anonymous" />
+      <img id="sky" src="./models/Skies.jpg" crossorigin="anonymous" />
 
       <a-asset-item id="village" src="./models/castle_village/scene.gltf"></a-asset-item>
+
     </a-assets>
 
     <!-- <a-entity id="player" networked="template:#avatar-template;attachTemplateToLocal:false;" camera position="0 1.3 0" wasd-controls look-controls></a-entity> -->
     <!-- added random spawn -->
-    <a-entity id="player" networked="template:#avatar-template;attachTemplateToLocal:false;" camera position="0 1.6 0" spawn-in-circle="radius:1;" wasd-controls look-controls></a-entity>
+    <a-sky src="#sky"></a-sky>
+    <a-entity id="player" networked="template:#avatar-template;attachTemplateToLocal:false;" camera position="-3 1.6 30" spawn-in-circle="radius:1;" wasd-controls look-controls></a-entity>
     <!-- <a-entity id="block" networked="template:#cube;attachTemplateToLocal:false;"spawn-in-circle="radius:1;"></a-entity> -->
 
+    <!-- loading ENV -->
     <a-entity gltf-model="#village"></a-entity>
+
+    <!-- Loading interactive objects -->
+    <a-entity gltf-model="./models/bed/scene.gltf" position="-12.6 0.0 27.869" rotation="0.0 85.56 0.0" scale="0.015 0.015 0.015"></a-entity>
+    <a-entity gltf-model="./models/old_mirror/scene.gltf" rotation="26.71587607136003 -167.00344629355183 -0.3907572162792215" visible="" scale="" position="-12.98 0.84209 24.14485"></a-entity>
+    <a-entity gltf-model="./models/table/wooden_table/scene.gltf" scale="0.005 0.005 0.005" position="4.70557 -0.00001 31.10294" rotation="180 -0.5849899088285705 179.9998479605043"></a-entity>
+    <a-entity gltf-model="./models/waterbottle/scene.gltf" scale="0.0007 0.0007 0.0007" position="-11.90311 1.99065 30.37575"></a-entity>
+
+
     <a-box
           color="#00AA00"
           width="0.5"
