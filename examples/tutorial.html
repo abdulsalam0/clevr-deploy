@@ -1,0 +1,865 @@
+<html>
+  <head>
+    <title>Tutorial</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@4.2.1/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script> 
+  </head>
+  <body>
+    <a-scene id="main-scene" environment="preset:contact">
+
+      <!-- cam position -->
+      <a-entity id="cam" camera position="0 1.6 0" wasd-controls look-controls>
+        <a-entity id="cursor" cursor position="0  0 -1"
+                  geometry="primitive: sphere; radius: 0.007"
+                  material="color: #000000;  shader: flat; opacity:0.5;"
+        ></a-entity>
+      </a-entity>
+
+
+      <!-- main checkpoint -->
+      <a-entity>
+      <!-- text -->
+      <a-entity id="textBody1"
+      look-at="#cam"
+      position=" 0 2.3 -4"
+      scale="2 2 2"
+      text="value: Welcome to CleVR \n Your custom environment\n Checkout the options below\n ----------------------\nto interact with the options place to dot on the option you like of the screen and left click   ;
+            color: black;
+            align: center;
+            wrapCount:25;
+            width:1;
+            fonts :https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/roboto/Roboto-Medium.json;
+            shader: msdf;
+      "
+      geometry="primitive: plane; width: auto; height: 0.7"
+      material="color: #FFAA00; shader: flat; visible:true"
+      
+      animation__enter="property: text.color; from: #212121; to:#fff;
+                        startEvents: mouseenter; dur:250; easing:linear"
+      animation__leave="property: text.color; from: #fff; to:#212121;
+                        startEvents: mouseleave; dur:250; easing:linear"
+
+      event-set__enter=" _event: mouseenter; _target: #cursor; material.opacity:0.1"
+      event-set__leave=" _event: mouseleave; _target: #cursor; material.opacity:0.5"
+    ></a-entity>
+    
+    <!-- options text object interaction -->
+    <a-entity class="subtextBody1"
+      look-at="#cam"
+      position=" -0.48 1.5 -4"
+      scale="1.6 2 2"
+      text="value: object interaction;
+            color: black;
+            align: center;
+            wrapCount:25;
+            width:1;
+            fonts :https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/roboto/Roboto-Medium.json;
+            shader: msdf;
+      "
+      geometry="primitive: plane; width: 0.6; height: 0.1"
+      material="color: green; shader: flat; visible:true"
+      
+      animation__enter="property: text.color; from: #212121; to:#fff;
+                        startEvents: mouseenter; dur:250; easing:linear"
+      animation__leave="property: text.color; from: #fff; to:#212121;
+                        startEvents: mouseleave; dur:500; easing:linear"
+
+      event-set__enter=" _event: mouseenter; _target: #cursor; material.opacity:0.1"
+      event-set__leave=" _event: mouseleave; _target: #cursor; material.opacity:0.5"
+    ></a-entity>
+    
+
+    <a-entity class="subtextBody2"
+      look-at="#cam"
+      position=" 0.48 1.5 -4"
+      scale="1.6 2 2"
+      text="value: Movement;
+            color: black;
+            align: center;
+            wrapCount:25;
+            width:1;
+            fonts :https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/roboto/Roboto-Medium.json;
+            shader: msdf;
+      "
+      geometry="primitive: plane; width: 0.6; height: 0.1"
+      material="color: green; shader: flat; visible:true"
+      
+      animation__enter="property: text.color; from: #212121; to:#fff;
+                        startEvents: mouseenter; dur:250; easing:linear"
+      animation__leave="property: text.color; from: #fff; to:#212121;
+                        startEvents: mouseleave; dur:500; easing:linear"
+
+      event-set__enter=" _event: mouseenter; _target: #cursor; material.opacity:0.1"
+      event-set__leave=" _event: mouseleave; _target: #cursor; material.opacity:0.5"
+    ></a-entity>
+
+    <a-entity class="subtextBody3"
+      look-at="#cam"
+      position=" -0.48 1.29 -4"
+      scale="1.6 2 2"
+      text="value: set environment;
+            color: black;
+            align: center;
+            wrapCount:25;
+            width:1;
+            fonts :https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/roboto/Roboto-Medium.json;
+            shader: msdf;
+      "
+      geometry="primitive: plane; width: 0.6; height: 0.1"
+      material="color: green; shader: flat; visible:true"
+      
+      animation__enter="property: text.color; from: #212121; to:#fff;
+                        startEvents: mouseenter; dur:250; easing:linear"
+      animation__leave="property: text.color; from: #fff; to:#212121;
+                        startEvents: mouseleave; dur:500; easing:linear"
+
+      event-set__enter=" _event: mouseenter; _target: #cursor; material.opacity:0.1"
+      event-set__leave=" _event: mouseleave; _target: #cursor; material.opacity:0.5"
+    ></a-entity>
+
+      <!-- place holder -->
+      <a-box  color="#FFF" position="0 0.5 -4"></a-box>
+    </a-entity>
+
+    <a-entity class="subtextBody4"
+      look-at="#cam"
+      position=" 0.48 1.29 -4"
+      scale="1.6 2 2"
+      text="value: Use guide;
+            color: black;
+            align: center;
+            wrapCount:25;
+            width:1;
+            fonts :https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/roboto/Roboto-Medium.json;
+            shader: msdf;
+      "
+      geometry="primitive: plane; width: 0.6; height: 0.1"
+      material="color: green; shader: flat; visible:true"
+      
+      animation__enter="property: text.color; from: #212121; to:#fff;
+                        startEvents: mouseenter; dur:250; easing:linear"
+      animation__leave="property: text.color; from: #fff; to:#212121;
+                        startEvents: mouseleave; dur:500; easing:linear"
+
+      event-set__enter=" _event: mouseenter; _target: #cursor; material.opacity:0.1"
+      event-set__leave=" _event: mouseleave; _target: #cursor; material.opacity:0.5"
+    ></a-entity>
+
+      <!-- place holder -->
+      <a-box  color="#FFF" position="0 0.5 -4"></a-box>
+    </a-entity>
+
+
+
+    <!-- second checkpoint -->
+    <a-entity position="5 0 0">
+      <!-- text -->
+      <a-entity id="textBody1"
+      look-at="#cam"
+      position=" 0 2.3 -4"
+      scale="2 2 2"
+      text="value: Welcome to CleVR \n Your custom environment\n Checkout the options below\n ----------------------\nto interact with the options place to dot on the option you like of the screen and left click   ;
+            color: black;
+            align: center;
+            wrapCount:25;
+            width:1;
+            fonts :https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/roboto/Roboto-Medium.json;
+            shader: msdf;
+      "
+      geometry="primitive: plane; width: auto; height: 0.7"
+      material="color: #FFAA00; shader: flat; visible:true"
+      
+      animation__enter="property: text.color; from: #212121; to:#fff;
+                        startEvents: mouseenter; dur:250; easing:linear"
+      animation__leave="property: text.color; from: #fff; to:#212121;
+                        startEvents: mouseleave; dur:250; easing:linear"
+
+      event-set__enter=" _event: mouseenter; _target: #cursor; material.opacity:0.1"
+      event-set__leave=" _event: mouseleave; _target: #cursor; material.opacity:0.5"
+    ></a-entity>
+    
+    <!-- options text object interaction -->
+    <a-entity class="subtextBody1"
+      look-at="#cam"
+      position=" -0.48 1.5 -4"
+      scale="1.6 2 2"
+      text="value: object interaction;
+            color: black;
+            align: center;
+            wrapCount:25;
+            width:1;
+            fonts :https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/roboto/Roboto-Medium.json;
+            shader: msdf;
+      "
+      geometry="primitive: plane; width: 0.6; height: 0.1"
+      material="color: green; shader: flat; visible:true"
+      
+      animation__enter="property: text.color; from: #212121; to:#fff;
+                        startEvents: mouseenter; dur:250; easing:linear"
+      animation__leave="property: text.color; from: #fff; to:#212121;
+                        startEvents: mouseleave; dur:500; easing:linear"
+
+      event-set__enter=" _event: mouseenter; _target: #cursor; material.opacity:0.1"
+      event-set__leave=" _event: mouseleave; _target: #cursor; material.opacity:0.5"
+    ></a-entity>
+    
+
+    <a-entity class="subtextBody2"
+      look-at="#cam"
+      position=" 0.48 1.5 -4"
+      scale="1.6 2 2"
+      text="value: Movement;
+            color: black;
+            align: center;
+            wrapCount:25;
+            width:1;
+            fonts :https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/roboto/Roboto-Medium.json;
+            shader: msdf;
+      "
+      geometry="primitive: plane; width: 0.6; height: 0.1"
+      material="color: green; shader: flat; visible:true"
+      
+      animation__enter="property: text.color; from: #212121; to:#fff;
+                        startEvents: mouseenter; dur:250; easing:linear"
+      animation__leave="property: text.color; from: #fff; to:#212121;
+                        startEvents: mouseleave; dur:500; easing:linear"
+
+      event-set__enter=" _event: mouseenter; _target: #cursor; material.opacity:0.1"
+      event-set__leave=" _event: mouseleave; _target: #cursor; material.opacity:0.5"
+    ></a-entity>
+
+    <a-entity class="subtextBody3"
+      look-at="#cam"
+      position=" -0.48 1.29 -4"
+      scale="1.6 2 2"
+      text="value: set environment;
+            color: black;
+            align: center;
+            wrapCount:25;
+            width:1;
+            fonts :https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/roboto/Roboto-Medium.json;
+            shader: msdf;
+      "
+      geometry="primitive: plane; width: 0.6; height: 0.1"
+      material="color: green; shader: flat; visible:true"
+      
+      animation__enter="property: text.color; from: #212121; to:#fff;
+                        startEvents: mouseenter; dur:250; easing:linear"
+      animation__leave="property: text.color; from: #fff; to:#212121;
+                        startEvents: mouseleave; dur:500; easing:linear"
+
+      event-set__enter=" _event: mouseenter; _target: #cursor; material.opacity:0.1"
+      event-set__leave=" _event: mouseleave; _target: #cursor; material.opacity:0.5"
+    ></a-entity>
+
+    <a-entity class="subtextBody4"
+      look-at="#cam"
+      position=" 0.48 1.29 -4"
+      scale="1.6 2 2"
+      text="value: Use guide;
+            color: black;
+            align: center;
+            wrapCount:25;
+            width:1;
+            fonts :https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/roboto/Roboto-Medium.json;
+            shader: msdf;
+      "
+      geometry="primitive: plane; width: 0.6; height: 0.1"
+      material="color: green; shader: flat; visible:true"
+      
+      animation__enter="property: text.color; from: #212121; to:#fff;
+                        startEvents: mouseenter; dur:250; easing:linear"
+      animation__leave="property: text.color; from: #fff; to:#212121;
+                        startEvents: mouseleave; dur:500; easing:linear"
+
+      event-set__enter=" _event: mouseenter; _target: #cursor; material.opacity:0.1"
+      event-set__leave=" _event: mouseleave; _target: #cursor; material.opacity:0.5"
+    ></a-entity>
+
+      
+
+      <!-- place holder -->
+      <a-box  color="red" position="0 0.5 -4"></a-box>
+    </a-entity>
+
+
+    <!-- third checkpoint -->
+    <a-entity position="-5 0 0">
+      <!-- text -->
+      <a-entity id="textBody1"
+      look-at="#cam"
+      position=" 0 2.3 -4"
+      scale="2 2 2"
+      text="value: Welcome to CleVR \n Your custom environment\n Checkout the options below\n ----------------------\nto interact with the options place to dot on the option you like of the screen and left click   ;
+            color: black;
+            align: center;
+            wrapCount:25;
+            width:1;
+            fonts :https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/roboto/Roboto-Medium.json;
+            shader: msdf;
+      "
+      geometry="primitive: plane; width: auto; height: 0.7"
+      material="color: #FFAA00; shader: flat; visible:true"
+      
+      animation__enter="property: text.color; from: #212121; to:#fff;
+                        startEvents: mouseenter; dur:250; easing:linear"
+      animation__leave="property: text.color; from: #fff; to:#212121;
+                        startEvents: mouseleave; dur:250; easing:linear"
+
+      event-set__enter=" _event: mouseenter; _target: #cursor; material.opacity:0.1"
+      event-set__leave=" _event: mouseleave; _target: #cursor; material.opacity:0.5"
+    ></a-entity>
+    
+    <!-- options text object interaction -->
+    <a-entity class="subtextBody1"
+      look-at="#cam"
+      position=" -0.48 1.5 -4"
+      scale="1.6 2 2"
+      text="value: object interaction;
+            color: black;
+            align: center;
+            wrapCount:25;
+            width:1;
+            fonts :https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/roboto/Roboto-Medium.json;
+            shader: msdf;
+      "
+      geometry="primitive: plane; width: 0.6; height: 0.1"
+      material="color: green; shader: flat; visible:true"
+      
+      animation__enter="property: text.color; from: #212121; to:#fff;
+                        startEvents: mouseenter; dur:250; easing:linear"
+      animation__leave="property: text.color; from: #fff; to:#212121;
+                        startEvents: mouseleave; dur:500; easing:linear"
+
+      event-set__enter=" _event: mouseenter; _target: #cursor; material.opacity:0.1"
+      event-set__leave=" _event: mouseleave; _target: #cursor; material.opacity:0.5"
+    ></a-entity>
+    
+
+    <a-entity class="subtextBody2"
+      look-at="#cam"
+      position=" 0.48 1.5 -4"
+      scale="1.6 2 2"
+      text="value: Movement;
+            color: black;
+            align: center;
+            wrapCount:25;
+            width:1;
+            fonts :https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/roboto/Roboto-Medium.json;
+            shader: msdf;
+      "
+      geometry="primitive: plane; width: 0.6; height: 0.1"
+      material="color: green; shader: flat; visible:true"
+      
+      animation__enter="property: text.color; from: #212121; to:#fff;
+                        startEvents: mouseenter; dur:250; easing:linear"
+      animation__leave="property: text.color; from: #fff; to:#212121;
+                        startEvents: mouseleave; dur:500; easing:linear"
+
+      event-set__enter=" _event: mouseenter; _target: #cursor; material.opacity:0.1"
+      event-set__leave=" _event: mouseleave; _target: #cursor; material.opacity:0.5"
+    ></a-entity>
+
+    <a-entity class="subtextBody3"
+      look-at="#cam"
+      position=" -0.48 1.29 -4"
+      scale="1.6 2 2"
+      text="value: set environment;
+            color: black;
+            align: center;
+            wrapCount:25;
+            width:1;
+            fonts :https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/roboto/Roboto-Medium.json;
+            shader: msdf;
+      "
+      geometry="primitive: plane; width: 0.6; height: 0.1"
+      material="color: green; shader: flat; visible:true"
+      
+      animation__enter="property: text.color; from: #212121; to:#fff;
+                        startEvents: mouseenter; dur:250; easing:linear"
+      animation__leave="property: text.color; from: #fff; to:#212121;
+                        startEvents: mouseleave; dur:500; easing:linear"
+
+      event-set__enter=" _event: mouseenter; _target: #cursor; material.opacity:0.1"
+      event-set__leave=" _event: mouseleave; _target: #cursor; material.opacity:0.5"
+    ></a-entity>
+
+    <a-entity class="subtextBody4"
+      look-at="#cam"
+      position=" 0.48 1.29 -4"
+      scale="1.6 2 2"
+      text="value: Use guide;
+            color: black;
+            align: center;
+            wrapCount:25;
+            width:1;
+            fonts :https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/roboto/Roboto-Medium.json;
+            shader: msdf;
+      "
+      geometry="primitive: plane; width: 0.6; height: 0.1"
+      material="color: green; shader: flat; visible:true"
+      
+      animation__enter="property: text.color; from: #212121; to:#fff;
+                        startEvents: mouseenter; dur:250; easing:linear"
+      animation__leave="property: text.color; from: #fff; to:#212121;
+                        startEvents: mouseleave; dur:500; easing:linear"
+
+      event-set__enter=" _event: mouseenter; _target: #cursor; material.opacity:0.1"
+      event-set__leave=" _event: mouseleave; _target: #cursor; material.opacity:0.5"
+    ></a-entity>
+
+      
+
+      <!-- place holder -->
+      <a-box  color="blue" position="0 0.5 -4"></a-box>
+    </a-entity>
+
+    <!-- forth checkpoint -->
+    <a-entity position="-10 0 0">
+      <!-- text -->
+      <a-entity id="textBody1"
+      look-at="#cam"
+      position=" 0 2.3 -4"
+      scale="2 2 2"
+      text="value: This is your environment and we believe you should be able to customise it to what ever YOU want\n ----------------------\n Look behind you and use the buttoms to check all the environment we added to the server     ;
+            color: black;
+            align: center;
+            wrapCount:25;
+            width:1;
+            fonts :https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/roboto/Roboto-Medium.json;
+            shader: msdf;
+      "
+      geometry="primitive: plane; width: auto; height: 0.7"
+      material="color: #FFAA00; shader: flat; visible:true"
+      
+      animation__enter="property: text.color; from: #212121; to:#fff;
+                        startEvents: mouseenter; dur:250; easing:linear"
+      animation__leave="property: text.color; from: #fff; to:#212121;
+                        startEvents: mouseleave; dur:250; easing:linear"
+
+      event-set__enter=" _event: mouseenter; _target: #cursor; material.opacity:0.1"
+      event-set__leave=" _event: mouseleave; _target: #cursor; material.opacity:0.5"
+    ></a-entity>
+    
+    <!-- options text object interaction -->
+    <a-entity class="subtextBody1"
+      look-at="#cam"
+      position=" -0.48 1.5 -4"
+      scale="1.6 2 2"
+      text="value: object interaction;
+            color: black;
+            align: center;
+            wrapCount:25;
+            width:1;
+            fonts :https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/roboto/Roboto-Medium.json;
+            shader: msdf;
+      "
+      geometry="primitive: plane; width: 0.6; height: 0.1"
+      material="color: green; shader: flat; visible:true"
+      
+      animation__enter="property: text.color; from: #212121; to:#fff;
+                        startEvents: mouseenter; dur:250; easing:linear"
+      animation__leave="property: text.color; from: #fff; to:#212121;
+                        startEvents: mouseleave; dur:500; easing:linear"
+
+      event-set__enter=" _event: mouseenter; _target: #cursor; material.opacity:0.1"
+      event-set__leave=" _event: mouseleave; _target: #cursor; material.opacity:0.5"
+    ></a-entity>
+    
+
+    <a-entity class="subtextBody2"
+      look-at="#cam"
+      position=" 0.48 1.5 -4"
+      scale="1.6 2 2"
+      text="value: Movement;
+            color: black;
+            align: center;
+            wrapCount:25;
+            width:1;
+            fonts :https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/roboto/Roboto-Medium.json;
+            shader: msdf;
+      "
+      geometry="primitive: plane; width: 0.6; height: 0.1"
+      material="color: green; shader: flat; visible:true"
+      
+      animation__enter="property: text.color; from: #212121; to:#fff;
+                        startEvents: mouseenter; dur:250; easing:linear"
+      animation__leave="property: text.color; from: #fff; to:#212121;
+                        startEvents: mouseleave; dur:500; easing:linear"
+
+      event-set__enter=" _event: mouseenter; _target: #cursor; material.opacity:0.1"
+      event-set__leave=" _event: mouseleave; _target: #cursor; material.opacity:0.5"
+    ></a-entity>
+
+    <a-entity class="subtextBody3"
+      look-at="#cam"
+      position=" -0.48 1.29 -4"
+      scale="1.6 2 2"
+      text="value: set environment;
+            color: black;
+            align: center;
+            wrapCount:25;
+            width:1;
+            fonts :https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/roboto/Roboto-Medium.json;
+            shader: msdf;
+      "
+      geometry="primitive: plane; width: 0.6; height: 0.1"
+      material="color: green; shader: flat; visible:true"
+      
+      animation__enter="property: text.color; from: #212121; to:#fff;
+                        startEvents: mouseenter; dur:250; easing:linear"
+      animation__leave="property: text.color; from: #fff; to:#212121;
+                        startEvents: mouseleave; dur:500; easing:linear"
+
+      event-set__enter=" _event: mouseenter; _target: #cursor; material.opacity:0.1"
+      event-set__leave=" _event: mouseleave; _target: #cursor; material.opacity:0.5"
+    ></a-entity>
+
+    <a-entity class="subtextBody4"
+      look-at="#cam"
+      position=" 0.48 1.29 -4"
+      scale="1.6 2 2"
+      text="value: Use guide;
+            color: black;
+            align: center;
+            wrapCount:25;
+            width:1;
+            fonts :https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/roboto/Roboto-Medium.json;
+            shader: msdf;
+      "
+      geometry="primitive: plane; width: 0.6; height: 0.1"
+      material="color: green; shader: flat; visible:true"
+      
+      animation__enter="property: text.color; from: #212121; to:#fff;
+                        startEvents: mouseenter; dur:250; easing:linear"
+      animation__leave="property: text.color; from: #fff; to:#212121;
+                        startEvents: mouseleave; dur:500; easing:linear"
+
+      event-set__enter=" _event: mouseenter; _target: #cursor; material.opacity:0.1"
+      event-set__leave=" _event: mouseleave; _target: #cursor; material.opacity:0.5"
+    ></a-entity>
+
+      
+
+      <!-- place holder -->
+      <a-box  color="black" position="0 0.5 -4"></a-box>
+    </a-entity>
+
+    <!-- Set env checkpoint -->
+    <a-entity position="-10 0 7">
+      <!-- text -->
+      <a-entity id="textBody1"
+      look-at="#cam"
+      position=" 0 2.3 -4"
+      scale="2 2 2"
+      text="value: Look at one the Next button \nand left click to change environment;
+            color: black;
+            align: center;
+            wrapCount:25;
+            width:1;
+            fonts :https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/roboto/Roboto-Medium.json;
+            shader: msdf;
+      "
+      geometry="primitive: plane; width: auto; height: 0.7"
+      material="color: #FFAA00; shader: flat; visible:true"
+      
+      animation__enter="property: text.color; from: #212121; to:#fff;
+                        startEvents: mouseenter; dur:250; easing:linear"
+      animation__leave="property: text.color; from: #fff; to:#212121;
+                        startEvents: mouseleave; dur:250; easing:linear"
+
+      event-set__enter=" _event: mouseenter; _target: #cursor; material.opacity:0.1"
+      event-set__leave=" _event: mouseleave; _target: #cursor; material.opacity:0.5"
+    ></a-entity>
+    
+    <!-- options text object interaction -->
+    <a-entity id="nextEnv"
+      look-at="#cam"
+      position=" -0.48 1.5 -4"
+      scale="1.6 2 2"
+      text="value: Next;
+            color: black;
+            align: center;
+            wrapCount:25;
+            width:1;
+            fonts :https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/roboto/Roboto-Medium.json;
+            shader: msdf;
+      "
+      geometry="primitive: plane; width: 0.6; height: 0.1"
+      material="color: green; shader: flat; visible:true"
+      
+      animation__enter="property: text.color; from: #212121; to:#fff;
+                        startEvents: mouseenter; dur:250; easing:linear"
+      animation__leave="property: text.color; from: #fff; to:#212121;
+                        startEvents: mouseleave; dur:500; easing:linear"
+
+      event-set__enter=" _event: mouseenter; _target: #cursor; material.opacity:0.1"
+      event-set__leave=" _event: mouseleave; _target: #cursor; material.opacity:0.5"
+    ></a-entity>
+    
+
+    <a-entity id="backEnv"
+      look-at="#cam"
+      position=" 0.48 1.5 -4"
+      scale="1.6 2 2"
+      text="value: Back;
+            color: black;
+            align: center;
+            wrapCount:25;
+            width:1;
+            fonts :https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/roboto/Roboto-Medium.json;
+            shader: msdf;
+      "
+      geometry="primitive: plane; width: 0.6; height: 0.1"
+      material="color: green; shader: flat; visible:true"
+      
+      animation__enter="property: text.color; from: #212121; to:#fff;
+                        startEvents: mouseenter; dur:250; easing:linear"
+      animation__leave="property: text.color; from: #fff; to:#212121;
+                        startEvents: mouseleave; dur:500; easing:linear"
+
+      event-set__enter=" _event: mouseenter; _target: #cursor; material.opacity:0.1"
+      event-set__leave=" _event: mouseleave; _target: #cursor; material.opacity:0.5"
+    ></a-entity>
+
+      <!-- place holder -->
+      <a-box  color="black" position="0 0.5 -4"></a-box>
+    </a-entity>
+
+
+    <!-- fifth checkpoint -->
+    <a-entity position="-15 0 0">
+      <!-- text -->
+      <a-entity id="textBody1"
+      look-at="#cam"
+      position=" 0 2.3 -4"
+      scale="2 2 2"
+      text="value: Welcome to CleVR \n Your custom environment\n Checkout the options below\n ----------------------\nto interact with the options place to dot on the option you like of the screen and left click   ;
+            color: black;
+            align: center;
+            wrapCount:25;
+            width:1;
+            fonts :https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/roboto/Roboto-Medium.json;
+            shader: msdf;
+      "
+      geometry="primitive: plane; width: auto; height: 0.7"
+      material="color: #FFAA00; shader: flat; visible:true"
+      
+      animation__enter="property: text.color; from: #212121; to:#fff;
+                        startEvents: mouseenter; dur:250; easing:linear"
+      animation__leave="property: text.color; from: #fff; to:#212121;
+                        startEvents: mouseleave; dur:250; easing:linear"
+
+      event-set__enter=" _event: mouseenter; _target: #cursor; material.opacity:0.1"
+      event-set__leave=" _event: mouseleave; _target: #cursor; material.opacity:0.5"
+    ></a-entity>
+    
+    <!-- options text object interaction -->
+    <a-entity class="subtextBody1"
+      look-at="#cam"
+      position=" -0.48 1.5 -4"
+      scale="1.6 2 2"
+      text="value: object interaction;
+            color: black;
+            align: center;
+            wrapCount:25;
+            width:1;
+            fonts :https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/roboto/Roboto-Medium.json;
+            shader: msdf;
+      "
+      geometry="primitive: plane; width: 0.6; height: 0.1"
+      material="color: green; shader: flat; visible:true"
+      
+      animation__enter="property: text.color; from: #212121; to:#fff;
+                        startEvents: mouseenter; dur:250; easing:linear"
+      animation__leave="property: text.color; from: #fff; to:#212121;
+                        startEvents: mouseleave; dur:500; easing:linear"
+
+      event-set__enter=" _event: mouseenter; _target: #cursor; material.opacity:0.1"
+      event-set__leave=" _event: mouseleave; _target: #cursor; material.opacity:0.5"
+    ></a-entity>
+    
+
+    <a-entity class="subtextBody2"
+      look-at="#cam"
+      position=" 0.48 1.5 -4"
+      scale="1.6 2 2"
+      text="value: Movement;
+            color: black;
+            align: center;
+            wrapCount:25;
+            width:1;
+            fonts :https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/roboto/Roboto-Medium.json;
+            shader: msdf;
+      "
+      geometry="primitive: plane; width: 0.6; height: 0.1"
+      material="color: green; shader: flat; visible:true"
+      
+      animation__enter="property: text.color; from: #212121; to:#fff;
+                        startEvents: mouseenter; dur:250; easing:linear"
+      animation__leave="property: text.color; from: #fff; to:#212121;
+                        startEvents: mouseleave; dur:500; easing:linear"
+
+      event-set__enter=" _event: mouseenter; _target: #cursor; material.opacity:0.1"
+      event-set__leave=" _event: mouseleave; _target: #cursor; material.opacity:0.5"
+    ></a-entity>
+
+    <a-entity class="subtextBody3"
+      look-at="#cam"
+      position=" -0.48 1.29 -4"
+      scale="1.6 2 2"
+      text="value: set environment;
+            color: black;
+            align: center;
+            wrapCount:25;
+            width:1;
+            fonts :https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/roboto/Roboto-Medium.json;
+            shader: msdf;
+      "
+      geometry="primitive: plane; width: 0.6; height: 0.1"
+      material="color: green; shader: flat; visible:true"
+      
+      animation__enter="property: text.color; from: #212121; to:#fff;
+                        startEvents: mouseenter; dur:250; easing:linear"
+      animation__leave="property: text.color; from: #fff; to:#212121;
+                        startEvents: mouseleave; dur:500; easing:linear"
+
+      event-set__enter=" _event: mouseenter; _target: #cursor; material.opacity:0.1"
+      event-set__leave=" _event: mouseleave; _target: #cursor; material.opacity:0.5"
+    ></a-entity>
+
+    <a-entity class="subtextBody4"
+      look-at="#cam"
+      position=" 0.48 1.29 -4"
+      scale="1.6 2 2"
+      text="value: Use guide;
+            color: black;
+            align: center;
+            wrapCount:25;
+            width:1;
+            fonts :https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/roboto/Roboto-Medium.json;
+            shader: msdf;
+      "
+      geometry="primitive: plane; width: 0.6; height: 0.1"
+      material="color: green; shader: flat; visible:true"
+      
+      animation__enter="property: text.color; from: #212121; to:#fff;
+                        startEvents: mouseenter; dur:250; easing:linear"
+      animation__leave="property: text.color; from: #fff; to:#212121;
+                        startEvents: mouseleave; dur:500; easing:linear"
+
+      event-set__enter=" _event: mouseenter; _target: #cursor; material.opacity:0.1"
+      event-set__leave=" _event: mouseleave; _target: #cursor; material.opacity:0.5"
+    ></a-entity>
+
+      
+
+      <!-- place holder -->
+      <a-box  color="orange" position="0 0.5 -4"></a-box>
+    </a-entity>
+
+
+    <!-- the end of the scene -->
+    </a-scene>
+
+
+
+
+    <script>
+
+      let envNum= 0;
+      let envList = ["contact","egypt","checkerboard","forest","goaland","yavapai","goldmine","threetowers","poison","arches"];
+      let getscene = document.querySelector("#main-scene");
+      let cam = document.querySelector("#cam");
+      console.log(getscene.getAttribute("environment"))
+
+      let objectInteractionList = document.querySelectorAll(".subtextBody1")
+      let MovementTextList= document.querySelectorAll(".subtextBody2")
+      let setEnvironmentList= document.querySelectorAll(".subtextBody3")
+      let useGuideList= document.querySelectorAll(".subtextBody4")
+
+      let nextButton = document.querySelector("#nextEnv");
+      let backButton = document.querySelector("#backEnv");
+
+      console.log(objectInteractionList);
+      console.log(MovementTextList);
+      console.log(setEnvironmentList);
+      console.log(useGuideList);
+      console.log(nextButton);
+      console.log(backButton);
+
+
+      // Button settings
+
+      // Next Button
+      nextButton.addEventListener("click", (event)=>{
+        if (envNum < envList.length) {
+          envNum++;
+          console.log(envList[envNum]);
+          getscene.setAttribute("environment", {preset:`${envList[envNum]}`})
+        }
+      });
+      
+      // Back Button
+      backButton.addEventListener("click", (event)=>{
+        if (envNum !== 0) {
+          envNum--;
+          console.log(envList[envNum]);
+          getscene.setAttribute("environment", {preset:`${envList[envNum]}`})
+        }
+      });
+
+      (()=>{
+        for (let i = 0; i < objectInteractionList.length; i++) {
+          let element = objectInteractionList[i];
+          element.addEventListener("click",(event)=>{
+            cam.setAttribute("position", {x: -5, y: 1.6, z: 0})
+            // getscene.setAttribute("environment", {preset:"egypt"})
+          })
+        }
+      })();
+
+      (()=>{
+        for (let i = 0; i < MovementTextList.length; i++) {
+          let element = MovementTextList[i];
+          element.addEventListener("click",(event)=>{
+
+            cam.setAttribute("position", {x: 5, y: 1.6, z: 0})
+            // getscene.setAttribute("environment", {preset:"egypt"})
+          })
+        }
+      })();
+
+      (()=>{
+        for (let i = 0; i < setEnvironmentList.length; i++) {
+          let element = setEnvironmentList[i];
+          element.addEventListener("click",(event)=>{
+
+            cam.setAttribute("position", {x: -10, y: 1.6, z: 0})
+            // getscene.setAttribute("environment", {preset:"egypt"})
+          })
+        }
+      })();
+
+      (()=>{
+        for (let i = 0; i < useGuideList.length; i++) {
+          let element = useGuideList[i];
+          element.addEventListener("click",(event)=>{
+
+            cam.setAttribute("position", {x: -15, y: 1.6, z: 0})
+            // getscene.setAttribute("environment", {preset:"egypt"})
+          })
+        }
+      })();
+
+      // objectInteraction.addEventListener("click",(event)=>{
+      //   console.log("hello")
+      //   cam.setAttribute("position", {x: -5, y: 1.6, z: 0})
+      //   // getscene.setAttribute("environment", {preset:"egypt"})
+      // })
+
+    </script>
+  </body>
+</html>
