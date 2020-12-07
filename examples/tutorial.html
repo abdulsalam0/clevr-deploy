@@ -4,10 +4,28 @@
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@4.2.1/dist/aframe-event-set-component.min.js"></script>
-    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script> 
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-animation-component@^4.1.1/dist/aframe-animation-timeline-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-animation-timeline-component@2.0.0/dist/aframe-animation-timeline-component.min.js"></script>
+
   </head>
   <body>
-    <a-scene id="main-scene" environment="preset:contact">
+    <a-scene id="main-scene" environment="preset:contact" animation-timeline__1="timeline:#movingObjectTimeline; loop:true">
+
+      <a-assets>
+        <a-timeline id="movingObjectTimeline">
+          <a-timeline-group>
+            <a-timeline-animation select="#table" name="up"></a-timeline-animation>
+            <a-timeline-animation select="#table" name="right"></a-timeline-animation>
+          </a-timeline-group>
+          <a-timeline-animation select="#table" name="left"></a-timeline-animation>
+          <a-timeline-group>
+            <a-timeline-animation select="#table" name="down"></a-timeline-animation>
+            <a-timeline-animation select="#table" name="right"></a-timeline-animation>
+          </a-timeline-group>
+          <a-timeline-animation select="#table" name="left"></a-timeline-animation>
+        </a-timeline>
+      </a-assets>
 
       <!-- cam position -->
       <a-entity id="cam" camera position="0 1.6 0" wasd-controls look-controls>
@@ -153,14 +171,14 @@
 
 
 
-    <!-- second checkpoint -->
+    <!-- second checkpoint Movement-->
     <a-entity position="5 0 0">
       <!-- text -->
       <a-entity id="textBody1"
       look-at="#cam"
       position=" 0 2.3 -4"
       scale="2 2 2"
-      text="value: Welcome to CleVR \n Your custom environment\n Checkout the options below\n ----------------------\nto interact with the options place to dot on the option and left click   ;
+      text="value: You can move around the world with AWSD keys or use the checkpoints.;
             color: black;
             align: center;
             wrapCount:25;
@@ -292,7 +310,7 @@
       look-at="#cam"
       position=" 0 2.3 -4"
       scale="2 2 2"
-      text="value: Welcome to CleVR \n Your custom environment\n Checkout the options below\n ----------------------\nto interact with the options place to dot on the option and left click   ;
+      text="value: As you can see behind you, interactive objects have a default animation which helps users identify them. We also went a further step by changing the cursor for the user to let them know these items are clickable. ;
             color: black;
             align: center;
             wrapCount:25;
@@ -629,14 +647,14 @@
     </a-entity>
 
 
-    <!-- fifth checkpoint -->
+    <!-- fifth checkpoint use guide-->
     <a-entity position="-15 0 0">
       <!-- text -->
       <a-entity id="textBody1"
       look-at="#cam"
       position=" 0 2.3 -4"
       scale="2 2 2"
-      text="value: Welcome to CleVR \n Your custom environment\n Checkout the options below\n ----------------------\nto interact with the options place to dot on the option and left click   ;
+      text="value: To reduce motion sickness in goggles VR while moving around the world, we recommend you sit down. ;
             color: black;
             align: center;
             wrapCount:25;
@@ -761,6 +779,24 @@
     </a-entity>
 
 
+    <!-- interactive object -->
+    <a-entity id="table"
+        gltf-model="./models/table/wooden_table/scene.gltf" 
+        scale="0.005 0.005 0.005" 
+        position="-5 0 3" 
+        rotation="180 -90.5849899088285705 179.9998479605043"
+        animation__up="dur:1000; easing:easeInOutSine; from:0; to:0.05; loop:-1; property:object3D.position.y"
+        animation__down="dur:1000; easing:easeInOutSine; from:0.05; to:0; loop:-1; property:object3D.position.y"
+        animation__right="dur:500; easing:easeInOutSine; from:180; to:178; loop:-1; property:object3D.rotation.x"
+        animation__left="dur:500; easing:easeInOutSine; from:178; to:180; loop:-1; property:object3D.rotation.x"
+        
+        event-set__enter=" _event: mouseenter; _target: #cursor; material.opacity: 1; material.color:red"
+        event-set__leave=" _event: mouseleave; _target: #cursor; material.opacity: 0.5; material.color: #000000"
+        >
+      </a-entity>
+    
+
+
     <!-- the end of the scene -->
     </a-scene>
 
@@ -769,12 +805,18 @@
 
     <script>
 
+      
       let envNum= 0;
       let envList = ["contact","egypt","checkerboard","forest","goaland","yavapai","goldmine","threetowers","poison","arches"];
       let getscene = document.querySelector("#main-scene");
       let cam = document.querySelector("#cam");
       console.log(getscene.getAttribute("environment"))
 
+
+      // state
+      let tableState = false;
+
+      //  button interactions
       let objectInteractionList = document.querySelectorAll(".subtextBody1")
       let MovementTextList= document.querySelectorAll(".subtextBody2")
       let setEnvironmentList= document.querySelectorAll(".subtextBody3")
@@ -783,16 +825,45 @@
       let nextButton = document.querySelector("#nextEnv");
       let backButton = document.querySelector("#backEnv");
 
+      // objects interaction
+      let table = document.querySelector("#table");
+
+      // debugging
       console.log(objectInteractionList);
       console.log(MovementTextList);
       console.log(setEnvironmentList);
       console.log(useGuideList);
       console.log(nextButton);
       console.log(backButton);
+      console.log(table);
+      
+      table.addEventListener("click",(event)=>{
+        let model = document.createElement('a-entity');
+        model.setAttribute("id","tableInfo")
+        model.setAttribute("obj-model",{obj: "./models/DNA/DNA.obj", mtl: "./models/DNA/DNA.mtl"})
+        model.setAttribute("scale","0.2 0.2 0.2")
+        model.setAttribute("position","-2.40899 2.87879 3.06645")
+        model.setAttribute("event-set__enter",{_event: "mouseenter", _target: "#cursor", "material.opacity": "1", "material.color":"red"})
+        model.setAttribute("event-set__leave",{_event: "mouseleave", _target: "#cursor", "material.opacity": "0.5", "material.color":"#000000"})
+        model.setAttribute("rotation","-29.926158597478032 -71.88500385049846 22.337332600970274")
 
 
-      // Button settings
+        // handles the state of object
+        if(!tableState){
+        getscene.appendChild(model);
+        tableState = !tableState;
+        console.log("hello");
+        }else{
+          let item = document.querySelector("#tableInfo");
+          item.remove();
+          tableState = !tableState;
+        }
 
+
+      })
+
+
+      // Button settings //
       // Next Button
       nextButton.addEventListener("click", (event)=>{
         if (envNum < envList.length) {
@@ -816,7 +887,6 @@
           let element = objectInteractionList[i];
           element.addEventListener("click",(event)=>{
             cam.setAttribute("position", {x: -5, y: 1.6, z: 0})
-            // getscene.setAttribute("environment", {preset:"egypt"})
           })
         }
       })();
@@ -827,7 +897,7 @@
           element.addEventListener("click",(event)=>{
 
             cam.setAttribute("position", {x: 5, y: 1.6, z: 0})
-            // getscene.setAttribute("environment", {preset:"egypt"})
+
           })
         }
       })();
@@ -838,7 +908,6 @@
           element.addEventListener("click",(event)=>{
 
             cam.setAttribute("position", {x: -10, y: 1.6, z: 0})
-            // getscene.setAttribute("environment", {preset:"egypt"})
           })
         }
       })();
@@ -849,7 +918,7 @@
           element.addEventListener("click",(event)=>{
 
             cam.setAttribute("position", {x: -15, y: 1.6, z: 0})
-            // getscene.setAttribute("environment", {preset:"egypt"})
+
           })
         }
       })();
