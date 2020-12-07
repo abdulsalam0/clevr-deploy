@@ -308,6 +308,32 @@
 
     <a-sky src="#sky" rotation="0 -90 0"></a-sky> -->
 
+    <!-- 4.011, y: 1.6, z: 14.389 -->
+
+    <a-entity id="enterWeekOne"
+      position=" 6.822 2.144 13.555"
+      rotation=" 0 -74.900 0"
+      scale="1.6 2 2"
+      text="value: Enter Week1;
+            color: black;
+            align: center;
+            wrapCount:25;
+            width:1;
+            fonts :https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/roboto/Roboto-Medium.json;
+            shader: msdf;
+      "
+      geometry="primitive: plane; width: 0.6; height: 0.1"
+      material="color: green; shader: flat; visible:true"
+      
+      animation__enter="property: text.color; from: #212121; to:#fff;
+                        startEvents: mouseenter; dur:250; easing:linear"
+      animation__leave="property: text.color; from: #fff; to:#212121;
+                        startEvents: mouseleave; dur:500; easing:linear"
+
+      event-set__enter=" _event: mouseenter; _target: #cursor; material.opacity:0.1"
+      event-set__leave=" _event: mouseleave; _target: #cursor; material.opacity:0.5"
+    ></a-entity>
+
   </a-scene>
 
   <script>
@@ -337,6 +363,7 @@
     let MovementTextList= document.querySelectorAll(".subtextBody2")
     let setEnvironmentList= document.querySelectorAll(".subtextBody3")
     let useGuideList= document.querySelectorAll(".subtextBody4")
+    let enterWeekOne= document.querySelector("#enterWeekOne")
 
     let nextButton = document.querySelector("#nextEnv");
     let backButton = document.querySelector("#backEnv");
@@ -349,6 +376,7 @@
     console.log(MovementTextList);
     console.log(setEnvironmentList);
     console.log(useGuideList);
+    console.log(enterWeekOne);
     console.log(nextButton);
     console.log(backButton);
     console.log(table);
@@ -375,6 +403,11 @@
           item.remove();
           tableState = !tableState;
         }
+      });
+
+      // Enter Week one 
+      enterWeekOne.addEventListener("click", (event)=>{
+        cam.setAttribute("position", {x: 8.378, y: 1.6, z: 13.127});
       });
       
       
