@@ -13,6 +13,10 @@
     <!-- event handling -->
     <script src="https://unpkg.com/aframe-event-set-component@4.2.1/dist/aframe-event-set-component.min.js"></script>
 
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-animation-component@^4.1.1/dist/aframe-animation-timeline-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-animation-timeline-component@2.0.0/dist/aframe-animation-timeline-component.min.js"></script>
+
 
 
     <script>
@@ -49,13 +53,25 @@
       </script>
   </head>
   <body>
-    <a-scene networked-scene="
-      room: roomNum1;
-      app: CleVR;
-      debug: true;
-      audio: false;
-    ">
+    <a-scene
+      id="main-scene"
+      networked-scene="room: roomNum1;app: CleVR;debug: true;audio: false;"
+      animation-timeline__1="timeline:#movingObjectTimeline; loop:true"
+    >
     <a-assets>
+
+      <a-timeline id="movingObjectTimeline">
+        <a-timeline-group>
+          <a-timeline-animation select="#table" name="up"></a-timeline-animation>
+          <a-timeline-animation select="#table" name="right"></a-timeline-animation>
+        </a-timeline-group>
+        <a-timeline-animation select="#table" name="left"></a-timeline-animation>
+        <a-timeline-group>
+          <a-timeline-animation select="#table" name="down"></a-timeline-animation>
+          <a-timeline-animation select="#table" name="right"></a-timeline-animation>
+        </a-timeline-group>
+        <a-timeline-animation select="#table" name="left"></a-timeline-animation>
+      </a-timeline>
 
       <template id="cube">
         <a-box
@@ -113,8 +129,11 @@
     <!-- <a-entity id="player" networked="template:#avatar-template;attachTemplateToLocal:false;" camera position="0 1.3 0" wasd-controls look-controls></a-entity> -->
     <!-- added random spawn -->
     <a-sky src="#sky"></a-sky>
-    <a-entity id="player" networked="template:#avatar-template;attachTemplateToLocal:false;" camera cursor="color:#FF0000" position="-3 1.6 30" spawn-in-circle="radius:1;" wasd-controls look-controls>
-      <a-cursor></a-cursor>
+    <a-entity id="player" networked="template:#avatar-template;attachTemplateToLocal:false;" camera position="-3 1.6 50" spawn-in-circle="radius:1;" wasd-controls look-controls>
+      <a-entity id="cursor" cursor position="0  0 -1"
+                  geometry="primitive: sphere; radius: 0.007"
+                  material="color: #000000;  shader: flat; opacity:0.5;"
+        ></a-entity>
     </a-entity>
     <!-- <a-entity id="block" networked="template:#cube;attachTemplateToLocal:false;"spawn-in-circle="radius:1;"></a-entity> -->
 
@@ -122,11 +141,154 @@
     <a-entity gltf-model="#village"></a-entity>
 
     <!-- Loading interactive objects -->
-    <a-entity gltf-model="./models/bed/scene.gltf" position="-12.6 0.0 27.869" rotation="0.0 85.56 0.0" scale="0.015 0.015 0.015"event-set__enter="_event:click; rotation:" ></a-entity>
-    <a-entity gltf-model="./models/old_mirror/scene.gltf" rotation="26.71587607136003 -167.00344629355183 -0.3907572162792215" visible="" scale="" position="-12.98 0.84209 24.14485"event-set__enter="_event:click; rotation:" ></a-entity>
-    <a-entity gltf-model="./models/table/wooden_table/scene.gltf" scale="0.005 0.005 0.005" position="4.70557 -0.00001 31.10294" rotation="180 -0.5849899088285705 179.9998479605043"event-set__enter="_event:click; rotation:"></a-entity>
-    <a-entity gltf-model="./models/waterbottle/scene.gltf" scale="0.0007 0.0007 0.0007" position="-11.90311 1.99065 30.37575"></a-entity>
+    <!-- <a-entity gltf-model="./models/bed/scene.gltf" position="-12.6 0.0 27.869" rotation="0.0 85.56 0.0" scale="0.015 0.015 0.015"event-set__enter="_event:click; rotation:" ></a-entity> -->
+    <!-- <a-entity gltf-model="./models/old_mirror/scene.gltf" rotation="26.71587607136003 -167.00344629355183 -0.3907572162792215" visible="" scale="" position="-12.98 0.84209 24.14485"event-set__enter="_event:click; rotation:" ></a-entity> -->
+    <a-entity
+      id ="table"
+      gltf-model="./models/table/wooden_table/scene.gltf" 
+      scale="0.005 0.005 0.005" 
+      position="4.70557 -0.00001 31.10294" 
+      rotation="180 -0.5849899088285705 179.9998479605043"
+      animation__up="dur:1000; easing:easeInOutSine; from:0; to:0.05; loop:-1; property:object3D.position.y"
+      animation__down="dur:1000; easing:easeInOutSine; from:0.05; to:0; loop:-1; property:object3D.position.y"
+      animation__right="dur:500; easing:easeInOutSine; from:180; to:178; loop:-1; property:object3D.rotation.x"
+      animation__left="dur:500; easing:easeInOutSine; from:178; to:180; loop:-1; property:object3D.rotation.x"
+      event-set__enter=" _event: mouseenter; _target: #cursor; material.opacity: 1; material.color:red"
+      event-set__leave=" _event: mouseleave; _target: #cursor; material.opacity: 0.5; material.color: #000000"
+    ></a-entity>
+    <!-- <a-entity gltf-model="./models/waterbottle/scene.gltf" scale="0.0007 0.0007 0.0007" position="-11.90311 1.99065 30.37575"></a-entity> -->
 
+
+    <!-- main checkpoint -->
+    <a-entity position="-9 0 50">
+      <!-- text -->
+      <a-entity id="textBody1"
+      look-at="#player"
+      position=" 0 2.3 -4"
+      scale="2 2 2"
+      text="value: Welcome Back\n These are the checkpoints you can use to navigate the world\n ------------------------\n Use the H key to return to this checkpoint;
+            color: black;
+            align: center;
+            wrapCount:25;
+            width:1;
+            fonts :https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/roboto/Roboto-Medium.json;
+            shader: msdf;
+      "
+      geometry="primitive: plane; width: auto; height: 0.7"
+      material="color: #FFAA00; shader: flat; visible:true"
+      
+      animation__enter="property: text.color; from: #212121; to:#fff;
+                        startEvents: mouseenter; dur:250; easing:linear"
+      animation__leave="property: text.color; from: #fff; to:#212121;
+                        startEvents: mouseleave; dur:250; easing:linear"
+
+      event-set__enter=" _event: mouseenter; _target: #cursor; material.opacity:0.1"
+      event-set__leave=" _event: mouseleave; _target: #cursor; material.opacity:0.5"
+    ></a-entity>
+    
+    <!-- options text object interaction -->
+    <a-entity class="subtextBody1"
+      look-at="#player"
+      position=" -0.48 1.5 -4"
+      scale="1.6 2 2"
+      text="value: Week1;
+            color: black;
+            align: center;
+            wrapCount:25;
+            width:1;
+            fonts :https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/roboto/Roboto-Medium.json;
+            shader: msdf;
+      "
+      geometry="primitive: plane; width: 0.6; height: 0.1"
+      material="color: green; shader: flat; visible:true"
+      
+      animation__enter="property: text.color; from: #212121; to:#fff;
+                        startEvents: mouseenter; dur:250; easing:linear"
+      animation__leave="property: text.color; from: #fff; to:#212121;
+                        startEvents: mouseleave; dur:500; easing:linear"
+
+      event-set__enter=" _event: mouseenter; _target: #cursor; material.opacity:0.1"
+      event-set__leave=" _event: mouseleave; _target: #cursor; material.opacity:0.5"
+    ></a-entity>
+    
+
+    <a-entity class="subtextBody2"
+      look-at="#player"
+      position=" 0.48 1.5 -4"
+      scale="1.6 2 2"
+      text="value: Week2;
+            color: black;
+            align: center;
+            wrapCount:25;
+            width:1;
+            fonts :https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/roboto/Roboto-Medium.json;
+            shader: msdf;
+      "
+      geometry="primitive: plane; width: 0.6; height: 0.1"
+      material="color: green; shader: flat; visible:true"
+      
+      animation__enter="property: text.color; from: #212121; to:#fff;
+                        startEvents: mouseenter; dur:250; easing:linear"
+      animation__leave="property: text.color; from: #fff; to:#212121;
+                        startEvents: mouseleave; dur:500; easing:linear"
+
+      event-set__enter=" _event: mouseenter; _target: #cursor; material.opacity:0.1"
+      event-set__leave=" _event: mouseleave; _target: #cursor; material.opacity:0.5"
+    ></a-entity>
+
+    <a-entity class="subtextBody3"
+      look-at="#player"
+      position=" -0.48 1.29 -4"
+      scale="1.6 2 2"
+      text="value: Week3;
+            color: black;
+            align: center;
+            wrapCount:25;
+            width:1;
+            fonts :https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/roboto/Roboto-Medium.json;
+            shader: msdf;
+      "
+      geometry="primitive: plane; width: 0.6; height: 0.1"
+      material="color: green; shader: flat; visible:true"
+      
+      animation__enter="property: text.color; from: #212121; to:#fff;
+                        startEvents: mouseenter; dur:250; easing:linear"
+      animation__leave="property: text.color; from: #fff; to:#212121;
+                        startEvents: mouseleave; dur:500; easing:linear"
+
+      event-set__enter=" _event: mouseenter; _target: #cursor; material.opacity:0.1"
+      event-set__leave=" _event: mouseleave; _target: #cursor; material.opacity:0.5"
+    ></a-entity>
+
+    <a-entity class="subtextBody4"
+      look-at="#player"
+      position=" 0.48 1.29 -4"
+      scale="1.6 2 2"
+      text="value: Week4;
+            color: black;
+            align: center;
+            wrapCount:25;
+            width:1;
+            fonts :https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/roboto/Roboto-Medium.json;
+            shader: msdf;
+      "
+      geometry="primitive: plane; width: 0.6; height: 0.1"
+      material="color: green; shader: flat; visible:true"
+      
+      animation__enter="property: text.color; from: #212121; to:#fff;
+                        startEvents: mouseenter; dur:250; easing:linear"
+      animation__leave="property: text.color; from: #fff; to:#212121;
+                        startEvents: mouseleave; dur:500; easing:linear"
+
+      event-set__enter=" _event: mouseenter; _target: #cursor; material.opacity:0.1"
+      event-set__leave=" _event: mouseleave; _target: #cursor; material.opacity:0.5"
+    ></a-entity>
+
+      
+
+      <!-- place holder -->
+      <a-box  color="blue" position="0 0.5 -4"></a-box>
+    </a-entity>
 
     <a-box
     id="box1"
@@ -161,6 +323,114 @@
           }
         ]
       });
+
+    
+
+    let getscene = document.querySelector("#main-scene");
+    let cam = document.querySelector("#player");
+
+    // state
+    let tableState = false;
+
+    //  button interactions
+    let objectInteractionList = document.querySelectorAll(".subtextBody1")
+    let MovementTextList= document.querySelectorAll(".subtextBody2")
+    let setEnvironmentList= document.querySelectorAll(".subtextBody3")
+    let useGuideList= document.querySelectorAll(".subtextBody4")
+
+    let nextButton = document.querySelector("#nextEnv");
+    let backButton = document.querySelector("#backEnv");
+
+    // objects interaction
+    let table = document.querySelector("#table");
+
+    // debugging
+    console.log(objectInteractionList);
+    console.log(MovementTextList);
+    console.log(setEnvironmentList);
+    console.log(useGuideList);
+    console.log(nextButton);
+    console.log(backButton);
+    console.log(table);
+
+    // adding model object
+    table.addEventListener("click",(event)=>{
+        let model = document.createElement('a-entity');
+        model.setAttribute("id","tableInfo")
+        model.setAttribute("obj-model",{obj: "./models/DNA/DNA.obj", mtl: "./models/DNA/DNA.mtl"})
+        model.setAttribute("scale","0.2 0.2 0.2")
+        model.setAttribute("position","4.827 2.879 28.851")
+        model.setAttribute("event-set__enter",{_event: "mouseenter", _target: "#cursor", "material.opacity": "1", "material.color":"red"})
+        model.setAttribute("event-set__leave",{_event: "mouseleave", _target: "#cursor", "material.opacity": "0.5", "material.color":"#000000"})
+        model.setAttribute("rotation","-29.926158597478032 -71.88500385049846 22.337332600970274")
+
+
+        // handles the state of object
+        if(!tableState){
+        getscene.appendChild(model);
+        tableState = !tableState;
+        console.log("hello");
+        }else{
+          let item = document.querySelector("#tableInfo");
+          item.remove();
+          tableState = !tableState;
+        }
+      });
+      
+      
+      // week 1
+      (()=>{
+        for (let i = 0; i < objectInteractionList.length; i++) {
+          let element = objectInteractionList[i];
+          element.addEventListener("click",(event)=>{
+            cam.setAttribute("position", {x: 4.011, y: 1.6, z: 14.389})
+          })
+        }
+      })();
+
+      // week 2
+      (()=>{
+        for (let i = 0; i < MovementTextList.length; i++) {
+          let element = MovementTextList[i];
+          element.addEventListener("click",(event)=>{
+
+            cam.setAttribute("position", {x: -1.01893, y: 1.6, z: -3.17029})
+
+          })
+        }
+      })();
+
+      // week 3 
+      (()=>{
+        for (let i = 0; i < setEnvironmentList.length; i++) {
+          let element = setEnvironmentList[i];
+          element.addEventListener("click",(event)=>{
+
+            cam.setAttribute("position", {x: -7.349, y: 1.6, z: 6.9472})
+          })
+        }
+      })();
+
+      // week 4 
+      (()=>{
+        for (let i = 0; i < useGuideList.length; i++) {
+          let element = useGuideList[i];
+          element.addEventListener("click",(event)=>{
+
+            cam.setAttribute("position", {x: -18.5704, y: 1.6, z: 17.2243})
+
+          })
+        }
+      })();
+
+      // home button
+      document.addEventListener("keyup", function(event) {
+      if (event.keyCode === 72) {
+        cam.setAttribute("position", {x: -8.81, y: 1.6, z: 50})
+        // cam.setAttribute("rotation", {x: 0.917, y: 720.552 , z: 0})
+      }
+    });
+
   </script>
 
   </body>
