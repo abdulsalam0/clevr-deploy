@@ -384,23 +384,50 @@
     // adding model object
     table.addEventListener("click",(event)=>{
         let model = document.createElement('a-entity');
-        model.setAttribute("id","tableInfo")
-        model.setAttribute("obj-model",{obj: "./models/DNA/DNA.obj", mtl: "./models/DNA/DNA.mtl"})
-        model.setAttribute("scale","0.2 0.2 0.2")
-        model.setAttribute("position","4.827 2.879 28.851")
-        model.setAttribute("event-set__enter",{_event: "mouseenter", _target: "#cursor", "material.opacity": "1", "material.color":"red"})
-        model.setAttribute("event-set__leave",{_event: "mouseleave", _target: "#cursor", "material.opacity": "0.5", "material.color":"#000000"})
-        model.setAttribute("rotation","-29.926158597478032 -71.88500385049846 22.337332600970274")
+        let imageOne = document.createElement('a-image');
+        let imageTwo = document.createElement('a-image');
+
+        //  setting class
+        model.setAttribute("id","tableInfoModel");
+        imageOne.setAttribute("id","tableInfoImageOne");
+        imageTwo.setAttribute("id","tableInfoImageTwo");
+
+        //image settings
+        imageOne.setAttribute("src","./models/soundBar/SoundNav.jpg");
+        imageOne.setAttribute("position","5.757 1.861 31.093");
+        imageOne.setAttribute("rotation","179.990 89.857 -179.990");
+        imageOne.setAttribute("width","3");
+        imageOne.setAttribute("height","1");
+
+        imageTwo.setAttribute("src","./models/DNA/DNAimage.jpg");
+        imageTwo.setAttribute("position","4.633 2.444 33.447");
+        imageTwo.setAttribute("rotation","0 -89.058 0");
+        imageTwo.setAttribute("width","2");
+        imageTwo.setAttribute("height","2");
+
+        model.setAttribute("obj-model",{obj: "./models/DNA/DNA.obj", mtl: "./models/DNA/DNA.mtl"});
+        model.setAttribute("scale","0.2 0.2 0.2");
+        model.setAttribute("position","4.827 2.879 28.851");
+        model.setAttribute("event-set__enter",{_event: "mouseenter", _target: "#cursor", "material.opacity": "1", "material.color":"red"});
+        model.setAttribute("event-set__leave",{_event: "mouseleave", _target: "#cursor", "material.opacity": "0.5", "material.color":"#000000"});
+        model.setAttribute("rotation","-29.926158597478032 -71.88500385049846 22.337332600970274");
+
 
 
         // handles the state of object
         if(!tableState){
         getscene.appendChild(model);
+        getscene.appendChild(imageTwo);
+        getscene.appendChild(imageOne);
         tableState = !tableState;
         console.log("hello");
         }else{
-          let item = document.querySelector("#tableInfo");
+          let item = document.querySelector("#tableInfoModel");
+          let itemOne = document.querySelector("#tableInfoImageOne");
+          let itemTwo = document.querySelector("#tableInfoImageTwo");
           item.remove();
+          itemOne.remove();
+          itemTwo.remove();
           tableState = !tableState;
         }
       });
