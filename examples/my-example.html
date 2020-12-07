@@ -141,7 +141,17 @@
     <a-entity gltf-model="#village"></a-entity>
 
     <!-- Loading interactive objects -->
-    <!-- <a-entity gltf-model="./models/bed/scene.gltf" position="-12.6 0.0 27.869" rotation="0.0 85.56 0.0" scale="0.015 0.015 0.015"event-set__enter="_event:click; rotation:" ></a-entity> -->
+    <a-entity
+      id = "bed" 
+      gltf-model="./models/bed/scene.gltf" 
+      position="10.346 0.046 22.717" 
+      rotation="0.0 85.56 0.0" 
+      scale="0.015 0.015 0.015"
+      animation__up="dur:1000; easing:easeInOutSine; from:0; to:0.05; loop:-1; property:object3D.position.y"
+      animation__down="dur:1000; easing:easeInOutSine; from:0.05; to:0; loop:-1; property:object3D.position.y"
+      event-set__enter=" _event: mouseenter; _target: #cursor; material.opacity: 1; material.color:red"
+      event-set__leave=" _event: mouseleave; _target: #cursor; material.opacity: 0.5; material.color: #000000"
+    ></a-entity>
     <!-- <a-entity gltf-model="./models/old_mirror/scene.gltf" rotation="26.71587607136003 -167.00344629355183 -0.3907572162792215" visible="" scale="" position="-12.98 0.84209 24.14485"event-set__enter="_event:click; rotation:" ></a-entity> -->
     <a-entity
       id ="table"
@@ -357,6 +367,7 @@
 
     // state
     let tableState = false;
+    let bedState = false;
 
     //  button interactions
     let objectInteractionList = document.querySelectorAll(".subtextBody1")
@@ -370,6 +381,7 @@
 
     // objects interaction
     let table = document.querySelector("#table");
+    let bed = document.querySelector("#bed");
 
     // debugging
     console.log(objectInteractionList);
@@ -429,6 +441,56 @@
           itemOne.remove();
           itemTwo.remove();
           tableState = !tableState;
+        }
+      });
+
+      bed.addEventListener("click",(event)=>{
+        let bedmodel = document.createElement('a-entity');
+        let bedimageOne = document.createElement('a-image');
+        let bedimageTwo = document.createElement('a-image');
+
+        //  setting class
+        bedmodel.setAttribute("id","bedInfoModel");
+        bedimageOne.setAttribute("id","bedInfoImageOne");
+        bedimageTwo.setAttribute("id","bedInfoImageTwo");
+
+        //image settings
+        bedimageOne.setAttribute("src","./models/soundBar2/soundwave-png.png");
+        bedimageOne.setAttribute("position","11.461 1.861 23.248");
+        bedimageOne.setAttribute("rotation","178.320 200.877 -179.990");
+        bedimageOne.setAttribute("width","2");
+        bedimageOne.setAttribute("height","0.5");
+
+        bedimageTwo.setAttribute("src","..models/mitocondria/mitochondria.jpg");
+        bedimageTwo.setAttribute("position","14.339 2.444 25.076");
+        bedimageTwo.setAttribute("rotation","0 200 0");
+        bedimageTwo.setAttribute("width","2");
+        bedimageTwo.setAttribute("height","2");
+
+        bedmodel.setAttribute("gltf-model","./models/mitocondria/scene.gltf");
+        bedmodel.setAttribute("scale","0.5 0.5 0.5");
+        bedmodel.setAttribute("position","12.883 2.879 21.575");
+        bedmodel.setAttribute("event-set__enter",{_event: "mouseenter", _target: "#cursor", "material.opacity": "1", "material.color":"red"});
+        bedmodel.setAttribute("event-set__leave",{_event: "mouseleave", _target: "#cursor", "material.opacity": "0.5", "material.color":"#000000"});
+        bedmodel.setAttribute("rotation","-29.926158597478032 -71.88500385049846 22.337332600970274");
+
+
+
+        // handles the state of object
+        if(!bedState){
+        getscene.appendChild(bedmodel);
+        getscene.appendChild(bedimageTwo);
+        getscene.appendChild(bedimageOne);
+        bedState = !bedState;
+        console.log("hello");
+        }else{
+          let beditem = document.querySelector("#bedInfoModel");
+          let beditemOne = document.querySelector("#bedInfoImageOne");
+          let beditemTwo = document.querySelector("#bedInfoImageTwo");
+          beditem.remove();
+          beditemOne.remove();
+          beditemTwo.remove();
+          bedState = !bedState;
         }
       });
 
